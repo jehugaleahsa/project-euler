@@ -2,18 +2,21 @@ package euler
 
 object Solution extends App {
 
+	def getHorizontals(values: IndexedSeq[IndexedSeq[Long]], size: Int) : IndexedSeq[IndexedSeq[Long]] = {	
 		for {
 			row <- (0 until values.length);
 			column <- (0 to values(row).length - size)
 		} yield values(row).drop(column).take(size)		
 	}
 	
+	def getVerticals(values: IndexedSeq[IndexedSeq[Long]], size: Int) : IndexedSeq[IndexedSeq[Long]] = {
 		for {
 			row <- 0 to values.length - size;
 			column <- 0 until values(row).length
 		} yield values.drop(row).take(size).map(c => c.head)
 	}
 	
+	def getDescendingDiagonals(values: IndexedSeq[IndexedSeq[Long]], size: Int) : IndexedSeq[IndexedSeq[Long]] = {
 		for {
 			row <- 0 to values.length - size;
 			column <- 0 to values(row).length - size
@@ -26,6 +29,7 @@ object Solution extends App {
 		}
 	}
 	
+	def getAscendingDiagonals(values: IndexedSeq[IndexedSeq[Long]], size: Int) : IndexedSeq[IndexedSeq[Long]] = {
 		for {
 			row <- 0 to values.length - size;
 			column <- 0 to values(row).length - size
