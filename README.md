@@ -1,5 +1,5 @@
 # project-euler
-Solutions for the Euler Project in Scala
+Solutions for the Euler Project in Scala... and now Rust!
 
 ## Overview
 This project is meant to track my progress while I work on the Project Euler problems.
