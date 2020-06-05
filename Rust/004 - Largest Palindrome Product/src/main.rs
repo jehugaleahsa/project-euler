@@ -1,8 +1,7 @@
 struct RangeData {
     current: i32,
     step: i32,
-    end: i32,
-    done: bool
+    end: i32
 }
 
 impl RangeData {
@@ -10,8 +9,7 @@ impl RangeData {
         RangeData {
             current: start,
             end: end,
-            step: step,
-            done: false
+            step: step
         }
     }
 }
@@ -20,14 +18,11 @@ impl Iterator for RangeData {
     type Item = i32;
 
     fn next(&mut self) -> Option<Self::Item> {
-        if self.done {
+        if (self.step > 0 && self.current > self.end) || (self.step < 0 && self.current < self.end) {
             None
         } else {
             let old = self.current;
-            self.current += self.step;
-            if (self.step > 0 && self.current > self.end) || (self.step < 0 && self.current < self.end) {
-                self.done = true;
-            }
+            self.current += self.step;            
             Some(old)
         }
     }
@@ -72,7 +67,10 @@ fn is_palindrome(value: u32) -> bool {
 fn find_max_palindrome() -> i32 {
     let mut max = 0;
     for x in range_step(999, 100, -1) {
-        for y in range_step(999, x, -1) {
+        if x * x < max {
+            break;
+        }
+        for y in range_step(x, 100, -1) {
             let product = x * y;
             if product < max {
                 break;
