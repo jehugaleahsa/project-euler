@@ -1,11 +1,11 @@
-struct Seive {
+struct Sieve {
     current: u64,
     primes: Vec<u64>
 }
 
-impl Seive {
-    fn new() -> Seive {
-        Seive {
+impl Sieve {
+    fn new() -> Sieve {
+        Sieve {
             current: 1u64,
             primes: vec![]
         }
@@ -24,7 +24,7 @@ impl Seive {
     }
 }
 
-impl Iterator for Seive {
+impl Iterator for Sieve {
     type Item = u64;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -38,11 +38,11 @@ impl Iterator for Seive {
     }
 }
 
-fn getLargestFactor(value: u64) -> u64 {
+fn get_largest_factor(value: u64) -> u64 {
     let mut remaining = value;
-    let seive = Seive::new();
+    let sieve = Sieve::new();
     let half = value / 2;
-    for prime in seive.take_while(|p| *p < half ) {
+    for prime in sieve.take_while(|p| *p < half ) {
         if remaining % prime == 0 {
             remaining /= prime;
             if remaining == 1 {
@@ -54,6 +54,6 @@ fn getLargestFactor(value: u64) -> u64 {
 }
 
 fn main() {
-    let factor = getLargestFactor(600_851_475_143u64);
+    let factor = get_largest_factor(600_851_475_143u64);
     println!("{}", factor);
 }
