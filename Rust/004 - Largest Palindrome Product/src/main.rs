@@ -1,12 +1,12 @@
-struct RangeData {
+struct DescendingRange {
     current: i32,
     step: i32,
     end: i32
 }
 
-impl RangeData {
-    fn new(start: i32, end: i32, step: i32) -> RangeData {
-        RangeData {
+impl DescendingRange {
+    fn new(start: i32, end: i32, step: i32) -> DescendingRange {
+        DescendingRange {
             current: start,
             end: end,
             step: step
@@ -14,11 +14,11 @@ impl RangeData {
     }
 }
 
-impl Iterator for RangeData {
+impl Iterator for DescendingRange {
     type Item = i32;
 
     fn next(&mut self) -> Option<Self::Item> {
-        if (self.step > 0 && self.current > self.end) || (self.step < 0 && self.current < self.end) {
+        if self.current < self.end {
             None
         } else {
             let old = self.current;
@@ -28,8 +28,8 @@ impl Iterator for RangeData {
     }
 }
 
-fn range_step(start: i32, end: i32, step: i32) -> RangeData {
-    RangeData::new(start, end, step)
+fn range_step(start: i32, end: i32, step: i32) -> DescendingRange {
+    DescendingRange::new(start, end, step)
 }
 
 fn to_digits(value: u32) -> Vec<u32> {
@@ -61,7 +61,7 @@ fn is_palindrome(value: u32) -> bool {
         front_index += 1;
         back_index -= 1;
     }
-    return true
+    true
 }
 
 fn find_max_palindrome() -> i32 {

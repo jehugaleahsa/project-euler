@@ -17,10 +17,10 @@ impl Sieve {
             if value % *prime == 0 {
                 return false;
             } else if *prime > half {
-                return true;
+                break;
             }
         }
-        return true;
+        true
     }
 }
 
